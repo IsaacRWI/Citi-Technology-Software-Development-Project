@@ -2,18 +2,39 @@ package project;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import yahoofinance.YahooFinance;
 import yahoofinance.Stock;
 import java.util.Queue;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.HashMap;
+import javafx.scene.chart.LineChart;
+import javafx.application.Application;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class App {
+public class App extends Application {
+    private LineChart<Number, Number> linechart;
+
+    @Override
+    public void start(Stage stage){
+        stage.setTitle("Dow Jones Industrial Average");
+        final NumberAxis xAxis = new NumberAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Time sec");
+        yAxis.setLabel("Price US$");
+        lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Dow Jones Industrial Average Price");
+        series = new XYChart.Series<>();
+        Scene scene = new Scene(lineChart, 800, 600);
+        stage.setScene(scene);
+        stage.show();
+        new Thread(this::updateData).start();
+    }
+    
     private void retrieveData() {
         Queue<ArrayList<Object>> stockPriceQueue = new LinkedList<>();
         while (true) {
@@ -36,7 +57,7 @@ public class App {
                 System.out.println("Error: " + e);
             }
             try {
-                Thread.sleep(5000);
+                Thread.sleep(5000);  // wait 5000ms before the while loop continues
             }
             catch (InterruptedException e) {
                 System.out.println("Error:" + e);
@@ -44,5 +65,8 @@ public class App {
         }
     
 
+    }
+    public static void main(String[] args) {
+        start();
     }
 }
