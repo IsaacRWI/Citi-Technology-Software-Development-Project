@@ -25,7 +25,10 @@ dependencies {
     implementation libs.guava
 
     // yahoo finance api
-    implementation group: 'com.yahoofinance-api', name: 'YahooFinanceAPI', version: '3.17.0'
+    // implementation group: 'com.yahoofinance-api', name: 'YahooFinanceAPI', version: '3.17.0'
+
+    // financial modelling prep 4 java
+    implementation 'dev.sorn:fmp4j:0.2.3'
     
 }
 
