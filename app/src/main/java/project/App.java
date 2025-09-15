@@ -35,7 +35,14 @@ public class App {
             catch(IOException e) {
                 System.out.println("Error: " + e);
             }
+            try {
+                Thread.sleep(5000);
+            }
+            catch (InterruptedException e) {
+                System.out.println("Error:" + e);
+            }
         }
+    
 
     }
 }
